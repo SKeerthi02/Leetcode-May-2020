@@ -1,0 +1,31 @@
+from math import log2
+class Solution:
+    def findComplement(self, num: int) -> int:
+        length = floor(log2(num)) + 1
+        bmask = (1 << length) - 1
+        return bmask ^ num 
+********************************************************************* another way of doing this **********
+class Solution:
+    def findComplement(self, num: int) -> int:
+        temp = num 
+        bit = 0 
+        while temp > 0:
+            temp = temp >> 1
+            bit = bit << 1
+            bit += 1
+        return bit ^ num 
+ 
+ Lines 12-15 does the same thing as line 5 
+ *********************************************************** from leetcode and claims the best method ******************
+ class Solution:
+    def findComplement(self, num):
+        # bitmask has the same length as num and contains only ones 1...1
+        bitmask = num
+        bitmask |= (bitmask >> 1)
+        bitmask |= (bitmask >> 2)
+        bitmask |= (bitmask >> 4)
+        bitmask |= (bitmask >> 8)
+        bitmask |= (bitmask >> 16)
+        # flip all bits
+        return bitmask ^ num
+
