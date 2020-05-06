@@ -1,0 +1,13 @@
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        count = collections.Counter(nums)
+        n = len(nums)
+        for num in count:
+            if count[num] > n//2 :
+                return num
+              
+**************************************** another way to look at this problem is. sort the array and median will be the number**********
+ class Solution:
+    def majorityElement(self, nums: List[int]) -> int:       
+        nums.sort()
+        return nums[int(len(nums)/2)]
