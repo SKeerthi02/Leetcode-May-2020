@@ -1,0 +1,22 @@
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        rows = len(image)
+        cols = len(image[0])
+        oldColor = image[sr][sc]
+        if newColor == oldColor:
+            return image
+        
+        def dfs(r, c):
+            if image[r][c] == oldColor:
+                image[r][c] = newColor
+                if r > 0:
+                    dfs(r-1, c)
+                if r+1 < rows:
+                    dfs(r+1,c)
+                if c > 0:
+                    dfs(r,c-1)
+                if c+1 < cols:
+                    dfs(r, c+1)
+
+        dfs(sr,sc)
+        return image
