@@ -1,0 +1,17 @@
+class Solution(object):
+    def removeKdigits(self, num, k):
+        """
+        :type num: str
+        :type k: int
+        :rtype: str
+        """
+        
+        temp = []
+        for digit in num:
+            while k and temp and temp[-1] > digit:
+                temp.pop()
+                k -= 1
+            temp.append(digit)
+        answer = temp[:-k] if k else temp
+        return "".join(answer).lstrip('0') or "0"
+        
