@@ -1,0 +1,24 @@
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        lens = len(s)
+        lenp = len(p)
+        
+        if lenp > lens:
+            return []
+        
+        s_map = Counter()
+        p_map = Counter(p)
+        
+        answer = []
+        
+        for k in range(lens):
+            s_map[s[k]] += 1
+            
+            if k >= lenp:
+                if s_map[s[k - lenp]] == 1:
+                    del s_map[s[k - lenp]]
+                else:
+                    s_map[s[k - lenp]] -= 1
+            if s_map == p_map:
+                answer.append(k - lenp + 1)
+        return answer
